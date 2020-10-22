@@ -1,13 +1,14 @@
-package com.example.KotlinApp
+package com.example.KotlinApp.controller
 
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class HomeController
+@RequestMapping( "/Clientes")
+class ClienteController
 {
-
-    @RequestMapping( "/")
+    @GetMapping
     fun home(): String
     {
         return "teste"
