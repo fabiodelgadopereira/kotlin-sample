@@ -1,24 +1,28 @@
 package com.example.KotlinApp.controller
 
+import com.example.KotlinApp.repository.ClienteRepository
+import com.example.KotlinApp.model.Cliente
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import org.springframework.http.ResponseEntity
 
 
 @RestController
-class ClienteController
+class ClienteController(@Autowired val clienteRepository: ClienteRepository)
 {
 
 
+
     @GetMapping("/Clientes")
-    fun findAllClientes(): String
-    {
-        return "teste"
+    fun findAllClientes(): ResponseEntity<List<Cliente>> {
+        val allClientes = clienteRepository.findAll()
+        return ResponseEntity.ok(allClientes)
     }
 
     @GetMapping("/Cliente/{id}")
-    @ResponseBody
-    fun getCliente(): String
-    {
-        return "teste"
+    fun getCliente(@PathVariable id: Int): ResponseEntity<Cliente> {
+        val allClientes = clienteRepository.get(id)
+        return ResponseEntity.ok(allClientes)
     }
 
     @PostMapping(value = ["/Cliente"])
