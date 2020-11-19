@@ -2,6 +2,7 @@ package com.example.KotlinApp.controller
 
 import com.example.KotlinApp.repository.ClienteRepository
 import com.example.KotlinApp.model.Cliente
+import com.example.KotlinApp.dtos.ClienteForRegister
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -18,7 +19,7 @@ class ClienteController(@Autowired val clienteRepository: ClienteRepository)
     }
 
     @GetMapping("/Cliente/{id}")
-    fun getCliente(@PathVariable id: Integer): ResponseEntity<Cliente> {
+    fun getCliente(@PathVariable id: Int): ResponseEntity<Cliente> {
         try {
             val allClientes = clienteRepository.get(id)
             return ResponseEntity.ok(allClientes)
@@ -29,9 +30,16 @@ class ClienteController(@Autowired val clienteRepository: ClienteRepository)
     }
 
     @PostMapping(value = ["/Cliente"])
-    fun postCliente(): String
+    fun postCliente( @RequestBody cli: ClienteForRegister): ResponseEntity<String>
     {
-        return "teste"
+        try {
+            val allClientes = clienteRepository.insert(cli)
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body( "Cliente cadastrado com sucesso")
+        } catch (exception: Exception) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body( "Erro ao tentar cadastrar cliente: "+exception.message)
+        }
     }
 
     @DeleteMapping(value = ["/Cliente"])
