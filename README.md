@@ -31,15 +31,13 @@ Maven 3.0 +
  - Abra o visual code ou execute o comando via prompt `code .`
  - Pressione `F5` para executar a aplicação.
 
-A aplicação deverá estar disponivel em seu navegador no endereço: http://localhost:8080/swagger-ui.html
+A aplicação deverá estar disponivel em seu navegador no endereço: http://localhost:8080/swagger-ui/index.html
 
 ![swagger](/assets/swagger.png)
 
 ### Entedento a estrutura de projeto
 
 ![ini](/assets/ini.png)
-
-[Swagger](#Swagger)
 
 ## Swagger
 
@@ -52,11 +50,11 @@ fonte: https://swagger.io/resources/webinars/getting-started-with-swagger/
 > A maneira mais fácil de instalar é usar o Maven:
 `pom.xml`
 ```xml
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency>
+<dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-boot-starter</artifactId>
+	<version>3.0.0</version>
+</dependency>
 ```
 > Exemplo de implementação em `config/ApplicationConfig`
 
@@ -158,7 +156,7 @@ security.ignored=none
 import javax.persistence.*
 
 @Entity
-@Table(name="Clientes", catalog="CadastroDB", schema="dbo")
+@Table(name="tablename", catalog="databasename", schema="dbo")
 class Cliente(
         var nome: String = "",
         var cidade: String = "",
