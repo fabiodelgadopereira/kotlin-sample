@@ -7,7 +7,7 @@ Olá! Seja bem vindo ;)
 1. [SpringBootApp](#SpringBootApp)
 2. [Projeto e Conteúdo](#Projeto-e-Conteudo)
 3. [Swagger](#Swagger)
-4. [JWT](#JWT)
+4. [Auntenticação com JWT](#Auntentica--o-com-JWT)
 5. [SQL Server e Hibernate](#SQL-Server-e-Hibernate)
 6. [SMTP](#SMTP)
 7. [Testes unitários (jUnit e JaCoCo)](#Testes-unitarios-jUnit-e-JaCoCo))
@@ -90,6 +90,16 @@ class ApplicationConfig {
     }
 }
 ```
+## Auntenticação com JWT
+
+O JWT (JSON Web Token) nada mais é que um padrão (RFC-7519) de mercado que define como transmitir e armazenar objetos JSON de forma simples, compacta e segura entre diferentes aplicações, muito utilizado para validar serviços em Web Services pois os dados contidos no token gerado pode ser validado a qualquer momento uma vez que ele é assinado digitalmente.
+
+JSON Web Tokens (JWT) é um padrão stateless porque o servidor autorizador não precisa manter nenhum estado; o próprio token é sulficiente para verificar a autorização de um portador de token.
+
+Os JWTs são assinados usando um algoritmo de assinatura digital (por exemplo, RSA) que não pode ser forjado. Por isso, qualquer pessoa que confie no certificado do assinante pode confiar com segurança que o JWT é autêntico. Não há necessidade de um servidor consultar o servidor emissor de token para confirmar sua autenticidade.
+
+fonte: https://jwt.io/introduction/
+
 ## SQL Server e Hibernate
 
 O mapeamento objeto-relacional foi criado para abstrair as diferenças entre o modelo relacional e o paradigma orientado a objetos. Assim, deixa de ser necessário criarmos soluções com o intuito de converter dados em objetos e vice-versa. Em Java, após a especificação JPA, isso passou a ser feito pelos frameworks que a implementam, como o Hibernate, EclipseLink e OpenJPA. A nós, desenvolvedores, basta fazer uso das anotações disponibilizadas pela JPA para viabilizar o mapeamento, evitando dessa forma criar uma forte dependência com alguma implementação. (fonte devmedia)
@@ -117,25 +127,25 @@ O mapeamento objeto-relacional foi criado para abstrair as diferenças entre o m
 
 `pom.xml`
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.4.31.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.31.Final</version>
-		</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+	<groupId>com.microsoft.sqlserver</groupId>
+	<artifactId>mssql-jdbc</artifactId>
+	<scope>runtime</scope>
+</dependency>
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-core</artifactId>
+	<version>5.4.31.Final</version>
+</dependency>
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-entitymanager</artifactId>
+	<version>5.4.31.Final</version>
+</dependency>
 ```
 
 > Exemplo de implementação para testes
