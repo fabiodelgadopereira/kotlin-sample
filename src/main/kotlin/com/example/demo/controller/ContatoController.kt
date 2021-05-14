@@ -20,7 +20,7 @@ class ContatoController(
     private val emailSenderService: EmailSenderService
     ) {
 
-        @PostMapping("/api/email")
+        @PostMapping()
         fun sendSimpleEmail(
                 @RequestBody request: EmailRequest
         ): String {
