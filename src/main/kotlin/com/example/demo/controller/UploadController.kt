@@ -15,7 +15,14 @@ import org.springframework.web.multipart.MultipartFile
 class UploadController(private val fileSaver: FileSaver) {
 
     @PostMapping("FileUpload", consumes = [(MediaType.MULTIPART_FORM_DATA_VALUE)])
-    fun save(
-            @RequestParam("file") file: MultipartFile,
-            @RequestParam("directory", required = false) directory: String?) = fileSaver.save(file, directory)
+    fun save(@RequestParam("file") file: MultipartFile): String {
+        try {
+            fileSaver.save(file)
+          return "Arquivo armazenado com sucesso!! "
+            // some code
+        } catch (e : Exception) {
+            return "Erro ao tentar armazenar arquivo :("
+        }
+
+    }
 }
