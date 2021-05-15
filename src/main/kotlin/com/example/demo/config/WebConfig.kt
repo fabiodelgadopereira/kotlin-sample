@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
-import springfox.documentation.spi.service.contexts.SecurityContext
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
@@ -27,7 +26,12 @@ import springfox.documentation.service.ApiKey
 import springfox.documentation.service.AuthorizationScope
 import springfox.documentation.service.SecurityReference
 import springfox.documentation.spi.DocumentationType
+import springfox.documentation.spi.service.contexts.SecurityContext
 import springfox.documentation.spring.web.plugins.Docket
+import springfox.documentation.spring.web.plugins.DocumentationPluginsManager
+import springfox.documentation.spring.web.scanners.ApiDescriptionReader
+import springfox.documentation.spring.web.scanners.ApiListingScanner
+import springfox.documentation.spring.web.scanners.ApiModelReader
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
@@ -128,5 +132,7 @@ class WebConfig(val bCryptPasswordEncoder: BCryptPasswordEncoder,
         return listOf(
                 SecurityReference("Bearer ", authorizationScopes))
     }
+
+
 
 }

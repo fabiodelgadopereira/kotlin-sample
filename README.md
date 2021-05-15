@@ -100,6 +100,79 @@ Os JWTs são assinados usando um algoritmo de assinatura digital (por exemplo, R
 
 fonte: https://jwt.io/introduction/
 
+> Exemplo de chamada curl:
+```bash
+curl -X POST "http://localhost:8080/login" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"username\": \"admin.admin\", \"password\": \"test1234\"}"
+```
+
+> A maneira mais fácil de instalar é usar o Maven:
+
+`pom.xml`
+```xml
+<properties>
+   <java.version>11</java.version>
+   <kotlin.version>1.4.21</kotlin.version>
+   <jjwt.version>0.11.2</jjwt.version>
+</properties>
+	<dependencies>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jjwt.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-kotlin</artifactId>
+					<compilerPlugins>
+						<plugin>spring</plugin>
+						<plugin>jpa</plugin>
+					</compilerPlugins>
+			<artifactId>kotlin-maven-allopen</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-maven-noarg</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
+	</dependencies>
+```
+
+Como foram muitas alterações, segue a lista de arquivos que envolvem a utilização de SMTP nesse exemplo:
+
+    src/main/kotlin/com/example/demo/config/AppConfiguration.kt 
+    src/main/kotlin/com/example/demo/config/ApplicationConfig.kt 
+    src/main/kotlin/com/example/demo/config/SecurityProperties.kt 
+    src/main/kotlin/com/example/demo/config/WebConfig.kt 
+    src/main/kotlin/com/example/demo/db/AppUserDetailsService.kt 
+    src/main/kotlin/com/example/demo/db/UserRepository.kt 
+    src/main/kotlin/com/example/demo/model/Role.kt 
+    src/main/kotlin/com/example/demo/model/User.kt 
+    src/main/kotlin/com/example/demo/security/JWTAuthenticationFilter.kt 
+    src/main/kotlin/com/example/demo/security/JWTAuthorizationFilter.kt 
+    src/main/resources/application.properties 
+
 ## SQL Server e Hibernate
 
 O mapeamento objeto-relacional foi criado para abstrair as diferenças entre o modelo relacional e o paradigma orientado a objetos. Assim, deixa de ser necessário criarmos soluções com o intuito de converter dados em objetos e vice-versa. Em Java, após a especificação JPA, isso passou a ser feito pelos frameworks que a implementam, como o Hibernate, EclipseLink e OpenJPA. A nós, desenvolvedores, basta fazer uso das anotações disponibilizadas pela JPA para viabilizar o mapeamento, evitando dessa forma criar uma forte dependência com alguma implementação. (fonte devmedia)
@@ -235,3 +308,29 @@ interface ClienteRepository : CrudRepository<Cliente, Long> {
 O SMTP ou Simple Mail Transfer Protocol, é uma convenção padrão dedicada ao envio de e-mail. A princípio o protocolo SMTP utilizava por padrão a porta 25 ou 465 (conexão criptografada) para conexão, porém a partir de 2013 os provedores de internet e as operadoras do Brasil passaram a bloquear a porta 25, e começaram a usar a porta 587 para diminuir a quantidade de SPAM. O SMTP é um protocolo que faz apenas o envio de e-mails, isso significa que o usuário não tem permissão para baixar as mensagens do servidor, nesse caso é necessário utilizar um Client de e-mail que suporte os protocolos POP3 ou IMAP como o Outlook, Thunderbird e etc. Para negócios ou empresas pequenas com baixo volume de e-mails, o servidor SMTP gratuito do Google pode ser uma ótima solução e você pode usar o Gmail para enviar o seu e-mail. Eles possuem uma infraestrutura gigante e você pode confiar nos serviços deles para ficar online. Porém, mesmo sendo completamente grátis, tudo tem um limite. De acordo com a documentação do Google, você pode enviar até 100 e-mails a cada período de 24 horas quando envia através do servidor SMTP deles.  Ou você também pode pensar nisso como sendo 3 mil e-mails por mês gratuitamente.Dependendo de quantos e-mails você envia ou do tamanho do seu negócio, isto pode ser mais do que suficiente. Se você envia mais de 5 mil e-mails por mês, você vai preferir usar um serviço de e-mail transacional de terceiros ou um serviço premium.
 
 ![ini](/assets/smtp.png)
+> A maneira mais fácil de instalar é usar o Maven:
+
+`pom.xml`
+```xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.3.7</version>
+		</dependency>
+```
+
+Como foram muitas alterações, segue a lista de arquivos que envolvem a utilização de SMTP nesse exemplo:
+
+
+    src/main/kotlin/com/example/demo/config/MailSenderConfig.kt 
+    src/main/kotlin/com/example/demo/config/TemplateConfig.kt 
+    src/main/kotlin/com/example/demo/controller/ContatoController.kt 
+    rc/main/kotlin/com/example/demo/model/Contato.kt 
+    src/main/kotlin/com/example/demo/service/EmailSenderService.kt 
+    src/main/resources/application.properties 
