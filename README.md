@@ -334,3 +334,38 @@ Como foram muitas alterações, segue a lista de arquivos que envolvem a utiliza
     rc/main/kotlin/com/example/demo/model/Contato.kt 
     src/main/kotlin/com/example/demo/service/EmailSenderService.kt 
     src/main/resources/application.properties 
+    
+## Testes unitários (jUnit )
+
+Teste de unidade é toda a aplicação de teste nas assinaturas de entrada e saída de um sistema. Consiste em validar dados válidos e inválidos via I/O (entrada/saída) sendo aplicado por desenvolvedores ou analistas de teste. Uma unidade é a menor parte testável de um programa de computador. Em programação procedural, uma unidade pode ser uma função individual ou um procedimento. Idealmente, cada teste de unidade é independente dos demais, o que possibilita ao programador testar cada módulo isoladamente.
+**JUnit** é uma framework de teste de unitários para a linguagem de programação Java. JUnit tem sido importante no desenvolvimento TDD e faz parte de uma família de estruturas de teste de unidade que é coletivamente conhecida como xUnit que se originou com SUnit.
+
+> Para instalar o JUnit utilize o commando abaixo:
+`pom.xml`
+```xml
+<dependency>
+    <groupId>org.jetbrains.kotlin</groupId>
+    <artifactId>kotlin-test-junit</artifactId>
+    <version>1.4.32</version>
+    <scope>test</scope>
+</dependency>
+```
+> Exemplo de classe teste:
+
+```java
+package com.example.demo
+
+import org.junit.Before
+import org.junit.Test
+import org.junit.Assert.assertEquals
+
+@SpringBootTest
+class DemoApplicationTests {
+
+	@Test
+	fun testSum() {
+		val expected = 42
+		assertEquals(expected, testSample.sum(40, 2))
+	}
+}
+ ```
