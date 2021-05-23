@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/Cliente")
@@ -19,7 +20,7 @@ class ClienteController(val repository: ClienteRepository) {
     fun findAll() = repository.findAll()
 
     @PostMapping
-    fun addCliente(@RequestBody Cliente: Cliente)
+    fun addCliente(@Valid @RequestBody Cliente: Cliente)
             = repository.save(Cliente)
 
     @PutMapping("/{id}")

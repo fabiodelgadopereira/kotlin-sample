@@ -10,7 +10,7 @@ Olá! Seja bem vindo ;)
 4. [Auntenticação com JWT](#Auntentica--o-com-JWT)
 5. [SQL Server e Hibernate](#SQL-Server-e-Hibernate)
 6. [SMTP](#SMTP)
-7. [Testes unitários (jUnit e JaCoCo)](#Testes-unitarios-jUnit-e-JaCoCo))
+7. [Testes unitários (jUnit)](#Testes-unitarios-jUnit))
 8. [Publicação](#Publicação)
 9. [Suporte](#Suporte)
 
@@ -344,10 +344,16 @@ Teste de unidade é toda a aplicação de teste nas assinaturas de entrada e sa�
 `pom.xml`
 ```xml
 <dependency>
-    <groupId>org.jetbrains.kotlin</groupId>
-    <artifactId>kotlin-test-junit</artifactId>
-    <version>1.4.32</version>
-    <scope>test</scope>
+	<groupId>org.jetbrains.kotlin</groupId>
+	<artifactId>kotlin-test-junit</artifactId>
+	<version>1.4.32</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.testng</groupId>
+	<artifactId>testng</artifactId>
+	<version>RELEASE</version>
+	<scope>test</scope>
 </dependency>
 ```
 > Exemplo de classe teste:
@@ -355,12 +361,10 @@ Teste de unidade é toda a aplicação de teste nas assinaturas de entrada e sa�
 ```java
 package com.example.demo
 
-import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
-@SpringBootTest
-class DemoApplicationTests {
+internal  class DemoApplicationTests {
 
 	@Test
 	fun testSum() {
