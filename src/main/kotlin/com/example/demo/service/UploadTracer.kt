@@ -1,5 +1,6 @@
 package com.example.demo.service
 
+import com.example.demo.model.TraceInfo
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.core.env.Environment
