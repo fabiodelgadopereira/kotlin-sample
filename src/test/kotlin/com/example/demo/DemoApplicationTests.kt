@@ -23,7 +23,7 @@ internal  class DemoApplicationTests {
 	@Test
 	fun nameMinimumSizeCliente() {
 		setUp()
-		val cliente: Cliente = Cliente("x", "cidade","teste@test.com","Masculino")
+		val cliente: Cliente = Cliente("0", "cidade","teste@test.com","Masculino")
 		val violations: Set<ConstraintViolation<Cliente>> = validator.validate(cliente)
 		assertFalse(violations.isEmpty())
 	}
