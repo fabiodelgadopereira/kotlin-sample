@@ -24,9 +24,14 @@ class ClienteController(val repository: ClienteRepository) {
             = repository.save(Cliente)
 
     @PutMapping("/{id}")
-    fun updateCliente(@PathVariable id: Long, @RequestBody Cliente: Cliente) {
-        assert(Cliente.id == id)
-        repository.save(Cliente)
+    fun updateCliente(@PathVariable id: Long, @RequestBody cliente: Cliente) {
+        var clientUpdate : Cliente = repository.findById(id).get().copy(
+                nome = cliente.nome,
+                cidade = cliente.cidade,
+                email = cliente.email,
+                sexo = cliente.sexo
+        )
+        repository.save(clientUpdate)
     }
 
     @DeleteMapping("/{id}")

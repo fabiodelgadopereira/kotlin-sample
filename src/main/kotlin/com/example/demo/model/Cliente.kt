@@ -1,5 +1,6 @@
 package com.example.demo.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.validator.constraints.Length
 import javax.persistence.*
 import javax.validation.constraints.*
@@ -15,6 +16,6 @@ data class Cliente(
         var email: String,
         @get:Size(min=3, max=15)
         var sexo: String,
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-         var id: Long = 0,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+         val id: Long = 0,
 )
