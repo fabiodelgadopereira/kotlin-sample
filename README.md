@@ -239,14 +239,18 @@ security.ignored=none
 import javax.persistence.*
 
 @Entity
-@Table(name="tablename", catalog="databasename", schema="dbo")
-class Cliente(
-        var nome: String = "",
-        var cidade: String = "",
-        var email: String = "",
-        var sexo: String = "",
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = 0
+@Table(name="Clientes", catalog="CadastroDB", schema="dbo")
+data class Cliente(
+        @get:Size(min=3, max=15)
+        var nome: String,
+        @get:Size(min=3, max=50)
+        var cidade: String,
+        @field:Email @get:Size(min=3, max=300)
+        var email: String,
+        @get:Size(min=3, max=15)
+        var sexo: String,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+         val id: Long = 0,
 )
 ```
 
@@ -275,9 +279,14 @@ class ClienteController(val repository: ClienteRepository) {
             = repository.save(Cliente)
 
     @PutMapping("/{id}")
-    fun updateCliente(@PathVariable id: Long, @RequestBody Cliente: Cliente) {
-        assert(Cliente.id == id)
-        repository.save(Cliente)
+    fun updateCliente(@PathVariable id: Long, @RequestBody cliente: Cliente) {
+        var clientUpdate : Cliente = repository.findById(id).get().copy(
+                nome = cliente.nome,
+                cidade = cliente.cidade,
+                email = cliente.email,
+                sexo = cliente.sexo
+        )
+        repository.save(clientUpdate)
     }
 
     @DeleteMapping("/{id}")
