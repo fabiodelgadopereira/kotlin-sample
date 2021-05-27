@@ -10,7 +10,7 @@ Olá! Seja bem vindo ;)
 4. [Auntenticação com JWT](#Auntentica--o-com-JWT)
 5. [SQL Server e Hibernate](#SQL-Server-e-Hibernate)
 6. [SMTP](#SMTP)
-7. [Testes unitários (jUnit)](#Testes-unitarios-jUnit))
+7. [Testes unitários (jUnit)](#Testes-unitarios-jUnit)
 8. [Publicação](#Publicação)
 9. [Suporte](#Suporte)
 
