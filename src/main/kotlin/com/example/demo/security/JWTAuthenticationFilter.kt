@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
+
 class JWTAuthenticationFilter(
         private val authManager: AuthenticationManager,
         private val securityProperties: SecurityProperties
@@ -73,7 +74,8 @@ class JWTAuthenticationFilter(
         val out: PrintWriter = res.getWriter()
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");
-        out.print(token);
+
+        out.print("{\"access_token\" : \"${token}\"}");
         out.flush();
 
     }
